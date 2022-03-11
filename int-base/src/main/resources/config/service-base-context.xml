@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:elasticsearch="http://www.springframework.org/schema/data/elasticsearch"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/data/elasticsearch http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+    <!--配置扫包-->
+    <context:component-scan base-package="com.xiaocai.base" />
+    <!--    是用于激活那些已经在spring容器里注册过的bean上面的注解，也就是显示的向Spring注册
+        AutowiredAnnotationBeanPostProcessor
+        CommonAnnotationBeanPostProcessor
+        PersistenceAnnotationBeanPostProcessor
+        RequiredAnnotationBeanPostProcessor
+    https://blog.csdn.net/u010648555/article/details/76371474
+    <context:component-scan base-package="com.xiaocai.base" />事实上也对该四个配置进行了注册，有扫包之后可去掉
+
+    < mvc:annotation-driven/>注册mvc的使用    -->
+    <context:annotation-config />
+    <!--通过配置织入@Aspectj切面
+        虽然可以通过编程的方式织入切面，但是一般情况下，我们还是使用spring的配置自动完成创建代理织入切面的工作。-->
+    <aop:aspectj-autoproxy />
+
+    <!--spring集成hibernate步骤
+    在数据库中创建表。这是可选的。
+    1.创建applicationContext.xml文件。其中包含DataSource，SessionFactory等的信息。base模块只定义seSsionFactory，datasource由具体项目（如int-web和int-service）
+    2.创建Employee.java文件。这是持久性类
+    3.创建employee.hbm.xml文件。它是映射文件。（该步骤改用注解）
+    4.创建EmployeeDao.java文件。它是使用HibernateTemplate的dao类。
+    5.创建InsertTest.java文件。它将调用EmployeeDao类的方法。
+    -->
+</beans>

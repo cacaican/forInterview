@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:elasticsearch="http://www.springframework.org/schema/data/elasticsearch"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/data/elasticsearch http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+    <!--配置扫包-->
+    <context:component-scan base-package="com.xiaocai.ui" />
+    <!--    是用于激活那些已经在spring容器里注册过的bean上面的注解，也就是显示的向Spring注册
+        AutowiredAnnotationBeanPostProcessor
+        CommonAnnotationBeanPostProcessor
+        PersistenceAnnotationBeanPostProcessor
+        RequiredAnnotationBeanPostProcessor
+    https://blog.csdn.net/u010648555/article/details/76371474
+    <context:component-scan base-package="com.xiaocai.base" />事实上也对该四个配置进行了注册，有扫包之后可去掉
+
+    < mvc:annotation-driven/>注册mvc的使用    -->
+    <context:annotation-config />
+    <!--通过配置织入@Aspectj切面
+        虽然可以通过编程的方式织入切面，但是一般情况下，我们还是使用spring的配置自动完成创建代理织入切面的工作。-->
+    <aop:aspectj-autoproxy />
+
+
+    <bean id="templateController" class="com.xiaocai.ui.controller.impl.TemplateControllerImpl" />
+
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/**/*.js">templateController</prop>
+                <prop key="/**/*.json">templateController</prop>
+                <prop key="/**/*.less">templateController</prop>
+                <prop key="/**/*.html">templateController</prop>
+            </props>
+        </property>
+        <property name="order" value="2000">
+        </property>
+    </bean>
+
+
+
+
+</beans>
