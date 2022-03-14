@@ -1,7 +1,8 @@
-package com.xiaocai.ui.servlet;
+package com.xiaocai.ui;
 
 import com.xiaocai.ui.converter.UTF8JsonHttpMessageConverter;
 import com.xiaocai.ui.converter.UTF8StringHttpMessageConverter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.format.FormatterRegistry;

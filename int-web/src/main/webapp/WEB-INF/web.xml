@@ -20,6 +20,10 @@
             <param-name>contextConfigLocation</param-name>
             <param-value></param-value>
         </init-param>
+        <init-param>
+            <param-name>expires</param-name>
+            <param-value>1440000</param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -27,9 +31,29 @@
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
-    <welcome-file-list>
+    <!--作用统一入参出参字符集-->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+
+   <!-- <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>default.html</welcome-file>
-    </welcome-file-list>
+    </welcome-file-list>-->
 
 </web-app>

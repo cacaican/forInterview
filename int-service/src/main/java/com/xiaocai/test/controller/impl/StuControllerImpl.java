@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.xiaocai.test.controller.StuController;
 import com.xiaocai.test.service.StudentService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @description:
@@ -24,11 +25,21 @@ public class StuControllerImpl implements StuController {
     @RequestMapping(value = "/getStudent" ,method = RequestMethod.POST)
     public String getStudent(String name) {
         //mvc中的参数匹配原则
-
-
         if (StringUtils.isBlank(name)) {
             return null;
         }
         return studentService.getStu(name).toString();
     }
+
+    @Override
+    @ResponseBody
+    @RequestMapping(value = "/getStudent2" ,method = RequestMethod.POST)
+    public String getStudent2(String name) {
+        //mvc中的参数匹配原则
+        if (StringUtils.isBlank(name)) {
+            return null;
+        }
+        return studentService.getStu(name).toString();
+    }
+
 }
